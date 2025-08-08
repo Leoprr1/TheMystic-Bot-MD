@@ -176,7 +176,7 @@ process.on('uncaughtException', (err) => {
 
 const connectionOptions = {
   logger: pino({ level: 'silent' }),
-  printQRInTerminal: opcion == '1' ? true : methodCodeQR ? true : false,
+  printQRInTerminal: true,
   mobile: MethodMobile,
   browser: opcion === '1' ? ['TheMystic-Bot-MD', 'Safari', '2.0.0'] : methodCodeQR ? ['TheMystic-Bot-MD', 'Safari', '2.0.0'] : ['Ubuntu', 'Chrome', '20.0.04'],
   auth: {
