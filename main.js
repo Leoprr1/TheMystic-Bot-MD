@@ -130,14 +130,14 @@ async function interceptMessages(messages) {
 const { state, saveCreds } = await useMultiFileAuthState(global.authFile);
 const { version } = await fetchLatestBaileysVersion();
 let phoneNumber = global.botnumber || process.argv.find(arg => arg.startsWith('--phone='))?.split('=')[1];
-const methodCodeQR = process.argv.includes('--method=qr');
+const methodCodeQR = true; // Forzar QR directamente
 const methodCode = !!phoneNumber || process.argv.includes('--method=code');
 const MethodMobile = process.argv.includes("mobile");
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
 const question = (texto) => new Promise((resolver) => rl.question(texto, resolver));
 
 let opcion;
-if (methodCodeQR) opcion = '1';
+if (methodCodeQR) opcion = '1'; 
 if (!methodCodeQR && !methodCode && !fs.existsSync(`./${global.authFile}/creds.json`)) {
   do {
     opcion = await question('[ ℹ️ ] Seleccione una opción:\n1. Con código QR\n2. Con código de texto de 8 dígitos\n---> ');
