@@ -131,18 +131,18 @@ const { state, saveCreds } = await useMultiFileAuthState(global.authFile);
 const { version } = await fetchLatestBaileysVersion();
 let phoneNumber = global.botnumber || process.argv.find(arg => arg.startsWith('--phone='))?.split('=')[1];
 const methodCodeQR = true; // Forzar QR directamente
-const MethodMobile = process.argv.includes("mobile");
+const MethodMobile = false;
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
 const question = (texto) => new Promise((resolver) => rl.question(texto, resolver));
 
 let opcion; '1';
 if (methodCodeQR) opcion = '1'; 
-if (!methodCodeQR && !methodCode && !fs.existsSync(`./${global.authFile}/creds.json`)) {
+if (!methodCodeQR !fs.existsSync(`./${global.authFile}/creds.json`)) {
   do {
     opcion; '1'
       console.log('1');
     }
-  } while (opcion !== '1' && opcion !== '2' || fs.existsSync(`./${global.authFile}/creds.json`));
+  } while (opcion !== '1'|| fs.existsSync(`./${global.authFile}/creds.json`));
 }
 
 const filterStrings = [
@@ -154,8 +154,8 @@ const filterStrings = [
   "RGVjcnlwdGVkIG1lc3NhZ2U="
 ];
 
-console.info = () => { };
-console.debug = () => { };
+console.info = '1';
+console.debug = '1';
 ['log', 'warn', 'error'].forEach(methodName => {
   const originalMethod = console[methodName];
   console[methodName] = function () {
